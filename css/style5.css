@@ -1,0 +1,316 @@
+/* ================================================= */
+/* 1. VARIÁVEIS CSS E DEFINIÇÕES PADRÃO (:ROOT)      */
+/* (Usando a estrutura consolidada para coerência) */
+/* ================================================= */
+
+:root {
+    /* --- CORES BASE GLOBAIS (Padrão: Tema Escuro Suave) --- */
+    --cor-fundo-principal: #1f1f1f;    /* Fundo da página (bg-body) */
+    --cor-fundo-secundario: #3b3b3b;   /* Fundo da Top Bar/Header */
+    --cor-fundo-card: #2c2c2c;         /* Fundo de Cards/Elementos Secundários (#252525) */
+    --cor-fundo-seletor: #3c3c3c;      /* Fundo do contêiner do seletor */
+    
+    --cor-texto-principal: #ffffff;    /* Texto principal */
+    --cor-texto-secundario: #b8b8b8;   /* Texto secundário/muted */
+    --cor-texto-sidebar: #ffffff;      /* Cor do texto dentro da Sidebar (white) */
+    
+    /* --- VARIÁVEIS DE DESTAQUE (CUSTOMIZÁVEIS POR TEMA) --- */
+    --cor-destaque-primaria: #0078D4;  /* Cor de destaque principal (Blue/Active) */
+    --cor-destaque-secundaria: #FFB900;/* Laranja/Amarelo */
+    --cor-borda-item: #555555;         /* Borda padrão de Cards/Itens */
+
+    /* --- UTILIDADES --- */
+    --bg-hover: #4e4e4e;               /* Fundo de Hover de itens */
+    --bg-active: #666666;              /* Fundo de Item Ativo (66, 65, 65) */
+    --sombra-caixa: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra para fundos escuros */
+    
+    /* Variáveis Específicas da página de Temas */
+    --cor-fundo-preview-tab: #505050;
+    --cor-fundo-preview: #252525;
+}
+
+/* ================================================= */
+/* 2. CLASSES DE TEMAS ESPECÍFICOS (TEMA CLARO/SENAI)*/
+/* ================================================= */
+
+.tema-claro {
+    /* Fundo e Textos Invertidos */
+    --cor-fundo-principal: #f0f0f0;    
+    --cor-fundo-secundario: #ffffff;   
+    --cor-fundo-card: #ffffff;
+    --cor-fundo-seletor: #f5f5f5;
+    
+    --cor-texto-principal: #1f2937;
+    --cor-texto-secundario: #6b7280;
+    --cor-texto-sidebar: #1f2937;     
+    
+    /* Utilidades claras */
+    --bg-hover: #f3f4f6;
+    --bg-active: #e5e7eb;
+    --sombra-caixa: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    /* Preview */
+    --cor-fundo-preview-tab: #e0e0e0;
+    --cor-fundo-preview: #ffffff;
+    
+    /* REQUERIMENTO SENAI */
+    --cor-borda-item: #0078D4; 
+    --cor-destaque-secundaria: #ff8c00; 
+    --cor-destaque-primaria: #007bff;
+}
+
+/* --- DEMAIS TEMAS (Inclua todos aqui ou no seu arquivo principal) --- */
+.tema-azul-ceu { --cor-destaque-primaria: #55cffa; }
+.tema-vermelho { --cor-destaque-primaria: #D13438; }
+
+
+/* ================================================= */
+/* 3. APLICAÇÃO DOS ESTILOS E VARIÁVEIS              */
+/* ================================================= */
+
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-fundo-principal); /* Corrigido de #2b2b2b */
+    color: var(--cor-texto-principal);            /* Corrigido de #ffffff */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+header {
+    background-color: var(--cor-fundo-secundario); /* Corrigido de --cor-tema-header */
+}
+
+/* Logo */
+.logo {
+    margin: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+.logo img {
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+.logo:hover img {
+    transform: scale(1.1);
+}
+.logo span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--cor-texto-sidebar); /* Corrigido de white */
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.topbar-left:hover .logo span {
+    opacity: 1;
+}
+
+/* Topbar Left (Sidebar) */
+.topbar-left {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 70px;
+    background-color: rgb(90, 90, 90); /* Corrigido de var(--bg-primary) */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px 0;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    z-index: 1002;
+    
+    border-bottom: 2px solid var(--cor-borda-item); /* Corrigido de rgb(90, 90, 90) */
+    border-right: 2px solid var(--cor-borda-item);  /* Corrigido de rgb(90, 90, 90) */
+  
+}
+
+/* Ativa o fundo laranja da sidebar no Tema Claro */
+.tema-claro .topbar-left {
+    background-color: rgb(151, 150, 150);/* Laranja SENAI */
+}
+
+.topbar-left:hover {
+    width: 250px;
+}
+.topbar-left:hover ~ .page-content {
+    margin-left: 250px;
+}
+
+/* Itens de Navegação (div:not(.logo)) */
+.topbar-left > div:not(.logo) {
+    text-decoration: none;
+    color: var(--cor-texto-sidebar); /* Corrigido de white */
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 12px 15px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.topbar-left > div:not(.logo) img {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+.topbar-left > div:not(.logo):hover {
+    background-color: transparent;
+    border: 2px solid var(--cor-destaque-primaria); /* Corrigido de red */
+    border-radius: 32px;
+}
+.topbar-left > div.active {
+    background-color: var(--bg-active); /* Corrigido de rgb(66, 65, 65) */
+    border-radius: 32px;
+}
+.topbar-left > div:not(.logo) span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.topbar-left:hover > div:not(.logo) span {
+    opacity: 1;
+}
+.topbar-left > div:not(.logo):hover img {
+    transform: scale(1.2);
+}
+
+/* Links de Navegação (<a>) */
+.topbar-left > a {
+    text-decoration: none; 
+    color: var(--cor-texto-sidebar); /* Corrigido de white */
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 12px 15px;
+    margin: 0 10px;
+    display: flex; 
+    align-items: center; 
+    gap: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: 32px; 
+    border: 2px solid transparent;
+}
+.topbar-left > a img {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+.topbar-left > a:hover {
+    background-color: transparent;
+    border: 2px solid var(--cor-destaque-primaria); /* Corrigido de red */
+}
+.topbar-left > a.active {
+    background-color: var(--bg-active); /* Aplicando cor ativa para consistência */
+}
+.topbar-left > a span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--cor-texto-sidebar); /* Corrigido de white */
+}
+.topbar-left:hover > a span {
+    opacity: 1;
+}
+.topbar-left > a:hover img {
+    transform: scale(1.2);
+}
+.topbar-left > .spacer {
+    flex-grow: 1; 
+}
+
+
+/* --- Elementos da Página de Seleção de Tema --- */
+
+.theme-selector-container {
+    background-color: var(--cor-fundo-seletor); /* Corrigido de #3c3c3c */
+    padding: 24px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: var(--sombra-caixa); /* Usando sombra adaptativa */
+}
+
+h3 {
+    margin-top: 0;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+}
+
+.color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.swatch:hover {
+    transform: scale(1.1);
+}
+
+.swatch.active {
+    /* Cor de destaque do tema atual */
+    border-color: var(--cor-destaque-primaria); /* Corrigido de #0078d4 */
+    /* Fundo do contêiner do seletor para que o anel brilhe */
+    box-shadow: 0 0 0 2px var(--cor-fundo-seletor); /* Corrigido de #3c3c3c */
+}
+
+.browser-preview {
+    border-radius: 8px;
+    background-color: var(--cor-fundo-preview); /* Corrigido de #252525 */
+    overflow: hidden; 
+    border: 1px solid var(--cor-borda-item); /* Corrigido de #555 */
+}
+
+.preview-header {
+    height: 35px;
+    background-color: var(--cor-fundo-secundario); /* Corrigido de #3b3b3b */ 
+    display: flex;
+    align-items: flex-end;
+    padding: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.preview-tab {
+    width: 120px;
+    height: 25px;
+    background-color: var(--cor-fundo-preview-tab); /* Corrigido de #505050 */
+    border-radius: 6px 6px 0 0;
+}
+
+.preview-content img {
+    width: 100%;
+    display: block;
+    height: auto;
+}

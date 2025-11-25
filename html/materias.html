@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocademy - Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+        
+    <header>
+    <div class="topbar-left">
+        <div class="active">
+           <a href="../html/dashboard.php"><img src="../imagens/iconhome.png" alt="Ícone Início" height="40" width="40">
+            <span>Início</span></a>
+        </div>
+        
+        <div>
+            <img src="../imagens/icons8-livros-96.png" alt="Ícone Materias" height="40" width="40">
+            <span>Materias</span>
+        </div>
+        
+        <div>
+            <img src="../imagens/iconhistorico.png" alt="Ícone Histórico" height="40" width="40">
+            <span>Historico</span>
+        </div>
+        
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
+        <div>
+           <a href="../html/config.html"><img src="../imagens/icons8-configurações-150.png" alt="Ícone Configurações" height="40" width="40">
+            <span>Configurações</span></a>
+        </div>
+    </div>
+    <div class="page-content">
+        <header class="header2">
+    
+            <div class="header-top">
+                <div class="header-left">
+                    <h1><img src="../imagens/logo.png" alt="Logo Autocademy">Autocademy</h1>
+                </div>
+                <div class="header-right">
+                    <span class="user-name">Admin</span>
+                    <img src="../imagens/user-avatar.png" alt="Avatar do Usuário" class="user-avatar">
+                </div>
+            </div>
+          
+        </header>
+        
+  <main class="materias">
+            <div class="materia1 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Mecânica Básica</h2>
+                        <p>akaa</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia2 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Matemática</h2>
+                        <p>akaa</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia3 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Português</h2>
+                        <p>akaa</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia4 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>História</h2>
+                        <p>kakak</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia5 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Geografia</h2>
+                        <p>kakak</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia6 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Ciências</h2>
+                        <p>kakak</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia7 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Física</h2>
+                        <p>kakak</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia8 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Química</h2>
+                        <p>kakak</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+
+            <div class="materia9 materia-card">
+                <a href="#" class="card-link">
+                    <div class="card-content-base">
+                        <h2>Biologia</h2>
+                        <p>kakak</p>
+                    </div>
+                    <div class="card-content-hover">
+                    </div>
+                </a>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2025 Autocademy. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+ <script>
+    (function() {
+    const temaSalvo = localStorage.getItem('temaPainel');
+    if (temaSalvo) {
+      // Define o valor da variável CSS '--cor-tema-header'
+      document.documentElement.style.setProperty('--cor-tema-header', temaSalvo);
+    }
+  })();
+ </script>
+ <script src="tema.js"></script>
+</body>
+</html>

@@ -1,0 +1,457 @@
+
+@font-face {
+  font-family: 'Blanka';
+  src: url('../fonts/blanka-webfont.woff2') format('woff2'),
+       url('../fonts/blanka-webfont.woff') format('woff'),
+       url('../fonts/blanka.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: white;
+    background-color: #111; 
+}
+
+
+header {
+
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    
+
+}
+
+.nav {
+
+    max-width: 1100px; 
+    width: 95%; 
+    margin: 0 auto; 
+
+
+    background-color: rgba(40, 40, 40, 0.7); 
+    border-radius: 50px; 
+    
+
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    padding: 12px 30px; 
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+#autocademy {
+    font-family: 'Blanka', sans-serif;
+    font-size: 1.4rem;
+    color: white;
+    letter-spacing: 1px;
+}
+
+
+.nav-links ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #f32222;
+}
+
+/* Botão "Entrar" agora arredondado para combinar */
+.nav-links a.btn-entrar {
+    background-color: #770d05;
+    padding: 8px 18px;
+    border-radius: 50px; /* Arredondado! */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links a.btn-entrar:hover {
+    background-color: #eb4034;
+    color: white;
+    box-shadow: 0 0 15px 5px rgb(196, 40, 1); /* Sombra com cor ciano */
+   text-shadow: 0 0 10px rgb(196, 40, 1);
+}
+
+/* =========================================
+   6. CONTEÚDO PRINCIPAL (CENTRALIZADO)
+   ========================================= */
+
+main {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    /* 1. Adicionado para "conter" o vídeo de fundo */
+    position: relative;
+    /* 2. Adicionado para evitar qualquer estouro de conteúdo */
+    overflow: hidden; 
+
+    /* 3. A imagem de fundo foi REMOVIDA daqui */
+}
+.inicio-texto h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    font-family: 'Blanka', sans-serif;
+}
+
+.inicio-texto h4 {
+    font-size: 1.25rem;
+    color: #ccc;
+    font-weight: normal;
+}
+
+#subtitulo-inicio {
+    color: rgba(255, 82, 82, 0.7);
+    text-shadow: 0px 1px #a71c03;
+    font-size: 1.3rem;
+}
+
+.video-fundo {
+    position: fixed; /* Fixo na tela, como o "body::before" */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Esta é a "mágica" para o vídeo cobrir a tela sem esmagar */
+    object-fit: cover; 
+    
+    /* Efeitos que você pediu */
+    filter: blur(2px); /* O mesmo desfoque */
+    opacity: 0.70;     /* A mesma opacidade */
+    
+    /* Joga o vídeo para trás de todo o conteúdo */
+    z-index: -1; 
+}
+
+/* =========================================
+   8. SETA DE SCROLL (NOVO)
+   ========================================= */
+.scroll-down-arrow {
+    /* 1. Posicionamento */
+    position: absolute;
+    bottom: 40px; /* Distância do fundo */
+    left: 50%;
+    
+    /* 2. Animação (definida abaixo) */
+    /* Ela vai descer e subir em 2 segundos, infinitamente */
+    animation: bounceDown 2s infinite ease-in-out;
+}
+
+/* 3. A Forma da Seta (Chevron) */
+.scroll-down-arrow span {
+    display: block;
+    width: 22px;  /* Tamanho */
+    height: 22px; /* Tamanho */
+    
+    /* 4. O truque para criar um 'V' sem linhas retas */
+    /* Remove as bordas de cima e da esquerda */
+    border-top: none;
+    border-left: none;
+    
+    /* Cria as linhas da direita e de baixo */
+    border-right: 3px solid rgba(255, 82, 82, 0.7)  ; /* Espessura e cor */
+    border-bottom: 3px solid rgba(255, 82, 82, 0.7)  ; /* Espessura e cor */
+    
+    /* 5. Gira o quadrado para formar a seta 'V' */
+    transform: rotate(45deg);
+}
+
+
+/* =========================================
+   9. ANIMAÇÃO DA SETA (NOVO)
+   ========================================= */
+@keyframes bounceDown {
+    0%, 100% {
+        /* Posição inicial (centralizado) */
+        transform: translateY(0) translateX(-50%);
+    }
+    50% {
+        /* Desce 15px e se mantém centralizado */
+        transform: translateY(15px) translateX(-50%);
+    }
+}
+
+span #sobre {
+    color: rgba(255, 82, 82, 0.7);
+}
+
+#subtitulo-sobre {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.conteiner-sobre {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 50px;
+    background-color: #1d1c1c;
+    width: 700px;
+    padding: 50px;
+    border-radius: 20px; /* Mantém o arredondamento */
+    border: 2px solid transparent; /* Borda inicial transparente */
+    position: relative; /* Essencial para o pseudo-elemento */
+    overflow: hidden; /* Esconde o que sair do contêiner */
+    transition: box-shadow 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
+}
+
+
+.conteiner-sobre::before {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: conic-gradient(
+        transparent,
+        rgba(196, 40, 1, 0.7),
+        transparent 30%
+    );
+    transform: translate(-50%, -50%);
+    animation: rotate-border 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.conteiner-sobre:hover::before {
+    opacity: 1;
+}
+
+.conteiner-sobre::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background-color: #1d1c1c;
+    border-radius: 14px;
+}
+
+@keyframes rotate-border {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.conteiner-sobre p {
+  max-width: 700px; 
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+/* =========================================
+   11. SEÇÃO CARROSSEL DE CURSOS (NOVO)
+   ========================================= */
+
+/* O contêiner da nova seção */
+#cursos-secao {
+    height: auto; /* Altura automática */
+    min-height: 100vh; /* Pelo menos 100% da tela */
+    padding: 100px 0; /* Espaçamento interno */
+    background-color: #111; /* Fundo escuro */
+    
+    /* Posição relativa para as setas de navegação */
+    position: relative;
+    
+    display: block; 
+    text-align: center;
+}
+
+#cursos-secao .secao-titulo {
+    font-size: 2.5rem;
+    font-family: 'Blanka', sans-serif;
+    color: white;
+    margin-bottom: 50px;
+}
+
+/* O contêiner do Swiper */
+#cursos-secao .course-carousel {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden; 
+}
+
+/* =========================================
+   12. ESTILO DO CARD DE CURSO (NOVO)
+   ========================================= */
+.course-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    height: 350px; 
+    background-color: #2a2a2a;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Efeito de expansão no hover */
+.course-card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    z-index: 10; 
+}
+
+/* Imagem do curso */
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+}
+
+/* Nome base do curso (visível no início) */
+.card-content-base {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    z-index: 2;
+    transition: opacity 0.4s ease;
+}
+
+.card-content-base h4 {
+    font-family: 'Blanka', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
+}
+
+/* Conteúdo do hover (detalhes e botão) */
+.card-content-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%; 
+    padding: 20px;
+    
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(8px); /* Aumentei um pouco o desfoque para melhor legibilidade */
+    
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 3;
+}
+
+/* Efeito de Hover: Mostra os detalhes */
+.course-card:hover .card-content-hover {
+    opacity: 1;
+    transform: translateY(0); /* Mantém a animação de deslizar para cima */
+}
+
+/* Efeito de Hover: Esconde o nome base */
+.course-card:hover .card-content-base {
+    opacity: 0;
+}
+
+.card-content-hover p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+.btn-inscrever {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #d93025; 
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-inscrever:hover {
+    background-color: #e64a3e;
+}
+
+#cursos-secao .swiper-button-prev,
+#cursos-secao .swiper-button-next {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    --swiper-navigation-color: #e92828;
+    --swiper-navigation-size: 22px;
+}
+
+/* Mostra as setas QUANDO o mouse está sobre a SEÇÃO */
+#cursos-secao:hover .swiper-button-prev,
+#cursos-secao:hover .swiper-button-next {
+    opacity: 1;
+}
+
+#cursos-secao .swiper-button-prev {
+    left: 40px; 
+}
+#cursos-secao .swiper-button-next {
+    right: 40px;
+}

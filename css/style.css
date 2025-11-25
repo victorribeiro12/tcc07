@@ -1,0 +1,458 @@
+/* ================================================= */
+/* 1. VARIÁVEIS CSS E DEFINIÇÕES PADRÃO (:ROOT)      */
+/* (O Padrão é o Tema Escuro/Sistema)             */
+/* ================================================= */
+
+:root {
+    /* --- CORES BASE GLOBAIS (Padrão: Tema Escuro Suave) --- */
+    --cor-fundo-principal: #1f1f1f;    /* Fundo da página (bg-body) */
+    --cor-fundo-secundario: #3b3b3b;   /* Fundo da Top Bar/Header */
+    --cor-fundo-card: #2c2c2c;         /* Fundo de Cards e Elementos Secundários */
+    --cor-fundo-footer: #2d2d2d;       /* Fundo do Rodapé */
+    
+    --cor-texto-principal: #ffffff;    /* Texto principal (text-primary) */
+    --cor-texto-secundario: #b8b8b8;   /* Texto secundário (text-secondary) */
+    --cor-texto-sidebar: #ffffff;      /* Cor do texto dentro da Sidebar (logo span, links) */
+    
+    /* --- VARIÁVEIS DE DESTAQUE (CUSTOMIZÁVEIS POR TEMA) --- */
+    --cor-destaque-primaria: #D13438;  /* Cor de destaque principal (ex: Bordas, Hover - Usando o Red do seu CSS original) */
+    --cor-destaque-secundaria: #FFB900;/* Laranja/Amarelo (Cor alternativa, Top Bar SENAI) */
+    --cor-borda-item: #555555;         /* Borda padrão de Cards/Itens */
+
+    /* --- UTILIDADES E SCROLLBAR --- */
+    --bg-hover: #4e4e4e;               /* Cor de fundo no hover de itens */
+    --bg-active: #666666;              /* Cor de fundo ativo */
+    
+    --card-shadow: rgba(0, 0, 0, 0.4);  /* Sombra do card padrão */
+    --card-shadow-hover: rgba(0, 0, 0, 0.6); /* Sombra do card no hover */
+    
+    --scrollbar-track: #2d2d2d;
+    --scrollbar-thumb: #666666;
+    --scrollbar-thumb-hover: #888888;
+}
+
+/* ================================================= */
+/* 2. CLASSES DE TEMAS ESPECÍFICOS (CORREÇÃO DE CORES)*/
+/* ================================================= */
+
+/* --- TEMA CLARO (CLASSE: tema-claro) - REQUISITOS SENAI --- */
+.tema-claro {
+    /* Fundo e Textos Invertidos */
+    --cor-fundo-principal: #f0f0f0;    
+    --cor-fundo-secundario: #ffffff;   
+    --cor-fundo-card: #ffffff;
+    --cor-fundo-footer: #e5e5e5;       
+    
+    --cor-texto-principal: #1f2937;
+    --cor-texto-secundario: #6b7280;
+    --cor-texto-sidebar: #1f2937;     /* Texto da Sidebar escuro */
+    
+    /* Utilidades claras */
+    --bg-hover: #f9fafb;
+    --bg-active: #f3f4f6;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: rgba(0, 0, 0, 0.2);
+
+    /* Scrollbar */
+    --scrollbar-track: #f0f0f0;
+    --scrollbar-thumb: #c0c0c0;
+    --scrollbar-thumb-hover: #a0a0a0;
+
+    /* REQUERIMENTO SENAI: Borda Azul e Topbar Laranja */
+    --cor-borda-item: #0078D4; 
+    --cor-destaque-secundaria: #003cff; /* Azul SENAI */
+    --cor-destaque-primaria: #007bff; /* Azul para hover/active */
+}
+
+/* --- DEMAIS TEMAS (Apenas Destaque Primário muda) --- */
+.tema-azul-ceu { --cor-destaque-primaria: #55cffa; }
+.tema-verde-agua { --cor-destaque-primaria: #8AF2D1; }
+.tema-rosa-claro { --cor-destaque-primaria: #F4C0E0; }
+.tema-magenta { --cor-destaque-primaria: #E3008C; }
+.tema-amarelo { --cor-destaque-primaria: #FFB900; }
+.tema-azul-edge { --cor-destaque-primaria: #0078D4; }
+.tema-roxo { --cor-destaque-primaria: #8E41B5; }
+.tema-vermelho { --cor-destaque-primaria: #D13438; }
+.tema-verde { --cor-destaque-primaria: #107C10; }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fontes (Inalteradas) */
+@font-face {
+    font-family: 'KGSecondChancesSolid';
+    src: url('../fontes/KGPerfectPenmanship.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Corpta;
+    src: url('../fontes/Corpta\ DEMO.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Chopsic;
+    src: url('../fontes/Chopsic.otf') format('opentype');
+    font-weight: normal;
+    font-weight: normal;
+}
+
+
+body {
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+
+header {
+    background-color: var(--cor-fundo-secundario);
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    /* Usando sombra adaptativa, ajustada no tema claro/escuro */
+    box-shadow: 0 2px 10px var(--card-shadow); 
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    font-family: 'Chopisc', sans-serif;
+    font-weight: normal;
+    transition: background-color 0.3s ease;
+   
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    filter: blur(22);
+}
+
+.header2{
+    filter: blur(0.3px);
+    border-radius: 66px;
+    opacity: 0.91;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name {
+    color: var(--cor-texto-principal); 
+    font-family: 'Corpta', sans-serif;
+    font-weight: 500;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.banner {
+    width: 100%;
+    height: 250px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+header h1 {
+    font-family: 'Corpta', sans-serif;
+    font-size: 28px;
+    color: var(--cor-texto-secundario); /* Alterado de --text-secondary */
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header h1 img {
+    width: 55px;
+    height: 55px;
+}
+
+.page-content {
+    margin-left: 70px;
+    transition: margin-left 0.3s ease;
+
+}
+
+main {
+    background-color: transparent;
+    padding: 40px;
+}
+
+/* Logo */
+.logo {
+    margin: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.logo img {
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.1);
+}
+
+.logo span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--cor-texto-sidebar); /* Alterado de 'white' */
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.topbar-left:hover .logo span {
+    opacity: 1;
+}
+
+/* Top Bar Lateral (Sidebar) - AQUI ESTÁ O ALARANJADO DO SENAI */
+.topbar-left {
+    border: none; /* Removido border: #000000; que é inválido */
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 70px;
+    /* Fundo padrão. Será sobrescrito pela classe .tema-claro */
+    background-color: var(--cor-fundo-secundario); 
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px 0;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    z-index: 1002;
+    /* Usando cores de borda para serem ajustadas pelo tema */
+    border-bottom: 2px solid var(--cor-destaque-primaria); /* Alterado de rgb(202, 71, 71) */
+    border-right: transparent
+}
+
+/* Ativa o fundo laranja da sidebar no Tema Claro */
+.tema-claro .topbar-left {
+    background-color: var(--cor-destaque-secundaria); /* Laranja SENAI */
+}
+
+.topbar-left:hover {
+    width: 250px;
+}
+
+.topbar-left:hover ~ .page-content {
+    margin-left: 250px;
+}
+
+.topbar-left > div:not(.logo) {
+    text-decoration: none;
+    color: var(--cor-texto-sidebar); /* Alterado de 'white' */
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 12px 15px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: 32px;
+    border: 2px solid transparent;
+}
+
+.topbar-left > div:not(.logo) img {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.topbar-left > div:not(.logo):hover {
+    background-color: transparent;
+    border: 2px solid var(--cor-destaque-primaria); /* Alterado de 'red' */
+    border-radius: 32px;
+}
+
+.topbar-left > div.active {
+    background-color: var(--bg-active); /* Alterado de rgb(66, 65, 65) */
+    border-radius: 32px;
+}
+
+.topbar-left > div:not(.logo) span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.topbar-left:hover > div:not(.logo) span {
+    opacity: 1;
+    color: var(--cor-texto-sidebar); /* Alterado de 'white' */
+}
+
+.topbar-left > div:not(.logo):hover img {
+    transform: scale(1.2);
+}
+
+/* Matérias Grid */
+.materias {
+    width: 100%;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    color: var(--cor-texto-principal); /* Alterado de --text-primary */
+}
+
+.materia-card {
+    border: 2px solid var(--cor-borda-item); /* Alterado de 'black' - AQUI É A BORDA AZUL DO SENAI! */
+    border-radius: 16px;
+    box-shadow: 0 4px 12px var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+    cursor: pointer;
+    min-height: 280px;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: card-fade-in 0.6s ease-out forwards;
+}
+
+/* Keyframes (Inalterados, usam transparência) */
+@keyframes card-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.materia-card:nth-child(1) { animation-delay: 0.1s; }
+.materia-card:nth-child(2) { animation-delay: 0.2s; }
+.materia-card:nth-child(3) { animation-delay: 0.3s; }
+.materia-card:nth-child(4) { animation-delay: 0.4s; }
+.materia-card:nth-child(5) { animation-delay: 0.5s; }
+.materia-card:nth-child(6) { animation-delay: 0.6s; }
+.materia-card:nth-child(7) { animation-delay: 0.7s; }
+.materia-card:nth-child(8) { animation-delay: 0.8s; }
+.materia-card:nth-child(9) { animation-delay: 0.9s; }
+
+.materia-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px var(--card-shadow-hover);
+}
+
+/* Background Images (Inalterados) */
+.materia1 { background-image: url(./imagens/banner.png); }
+/* ... (demais .materiaN) ... */
+
+.card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+.card-content-base {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    /* Transição de fundo usa o preto, que funciona bem em qualquer tema */
+    background: linear-gradient(to top, #000000, transparent); 
+    z-index: 2;
+    transition: background 0.3s ease;
+}
+
+.card-content-base h2 {
+    font-family: 'Chopsic', sans-serif;
+    font-size: 1.5rem;
+    color: var(--cor-texto-principal); /* Alterado de 'white' */
+    margin: 0;
+    font-weight: normal;
+}
+
+/* Se você ainda usar a classe light-mode, sobrescreve */
+body.light-mode .card-content-base h2 {
+    color: #1d1d1f;
+}
+
+/* Footer */
+footer {
+    background-color: var(--cor-fundo-footer); /* Alterado de #2d2d2d */
+    padding: 20px;
+    color: var(--cor-texto-principal); /* Alterado de --text-primary */
+    text-align: center;
+    font-family: 'Corpta', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Media Queries (Inalteradas) */
+@media (max-width: 1200px) {
+    .materias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .materias {
+        grid-template-columns: 1fr;
+    }
+
+    .page-content {
+        margin-left: 70px;
+    }
+
+    .topbar-left:hover~.page-content {
+        margin-left: 70px;
+    }
+}
