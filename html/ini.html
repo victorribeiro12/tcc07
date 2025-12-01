@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocademy - Início</title>
+    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+<header>
+    <div class="nav">
+
+        <div class="logo">
+            <img src="../imagens/logo.png" alt="Logo" style="width: 70px; height: 50px;">
+            <h6 id="autocademy">AUTOCADEMY</h6>
+        </div>
+
+        <div class="nav-links">
+            <ul>
+                <li><a href="../html/dashboard.php">Início</a></li>
+                <li><a href="../html/dashboard_professor.php">Cursos</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="./login.php" class="btn-entrar">Entrar</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<main>
+    <video class="video-fundo" autoplay loop muted playsinline>
+        <source src="../videos/fundo3.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos.
+    </video>
+
+    <div class="inicio-texto">
+        <h1>AUTOCADEMY</h1>
+        <h4 id="subtitulo-inicio">Seja o piloto da sua carreira.</h4> 
+    </div>
+    <a href="#sobre" class="scroll-down-arrow">
+        <span></span> </a>
+</main>
+    <section id="sobre" style="height: 1000px; padding: 50px;">
+       <h1 style="font-size: 3rem; text-align: center;">Bem-vindo a AUTO<span style="color: rgba(255, 82, 82, 0.7);">CADEMY</span></h1>
+       <h4 id="subtitulo-sobre">Entenda tudo sobre nossa empresa</h4>
+       
+       <div class="conteiner-sobre">
+        <h1 style="font-size: 2rem;">
+          Acelerando o seu Conhecimento Automotivo  
+        </h1>
+        <p style="font-size: 1.5rem;">
+        A AutoCademy funciona como uma sala de aula automotiva digital,
+         criada para suprir a defasagem do ensino tradicional diante da rápida evolução do mercado. 
+         Com foco 100% prático e instrutores especialistas, a plataforma oferece um ambiente estruturado para mecânicos
+          e profissionais dominarem as novas tecnologias do setor.
+        </p>
+       </div>
+    </section>
+
+<section id="cursos-secao">
+    
+    <h2 class="secao-titulo">Nossos Cursos</h2>
+
+    <div class="swiper course-carousel">
+        
+        <div class="swiper-wrapper" id="cursos-wrapper">
+            
+            </div>
+    </div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
+<script>
+        // Espera o HTML carregar para rodar o script
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. SEUS DADOS DOS CURSOS ---
+            const todosOsCursos = [
+                {
+                    nome: 'Mecânica de Precisão',
+                    imagem: 'img/cursos/mecanica.jpg',
+                    detalhes: 'Aprenda os fundamentos da mecânica de motores com foco em precisão e performance.'
+                },
+                {
+                    nome: 'Elétrica Automotiva',
+                    imagem: 'img/cursos/eletrica.jpg',
+                    detalhes: 'Diagnóstico e reparo de sistemas elétricos, de baterias a centrais eletrônicas.'
+                },
+                {
+                    nome: 'Pintura e Funilaria',
+                    imagem: 'img/cursos/pintura.jpg',
+                    detalhes: 'Técnicas profissionais de reparo de lataria e pintura com acabamento de showroom.'
+                },
+                {
+                    nome: 'Injeção Eletrônica',
+                    imagem: '../imagens/Injeção Eletrônica',
+                    detalhes: 'Especialize-se em sistemas de injeção eletrônica e mapeamento de performance.'
+                },
+                {
+                    nome: 'Preparação de Motores',
+                    imagem: 'img/cursos/performance.jpg',
+                    detalhes: 'Do básico ao avançado em preparação de motores para competição e rua.'
+                },
+                {
+                    nome: 'Detalhe Aduaneiro',
+                    imagem: 'img/cursos/detailing.jpg',
+                    detalhes: 'Curso completo de polimento, vitrificação e cuidados estéticos automotivos.'
+                }
+            ];
+
+            // --- 2. FUNÇÃO DE RANDOMIZAÇÃO (Fisher-Yates) ---
+            function shuffle(array) {
+                let currentIndex = array.length, randomIndex;
+                while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [
+                        array[randomIndex], array[currentIndex]];
+                }
+                return array;
+            }
+
+            // --- 3. POPULAR O CARROSSEL ---
+            function popularCarrossel() {
+                const cursosRandomizados = shuffle(todosOsCursos);
+                // Importante: Mira no ID dentro da nova seção
+                const wrapper = document.getElementById('cursos-wrapper');
+                
+                if (wrapper) { // Verifica se o elemento existe
+                    wrapper.innerHTML = ''; // Limpa o wrapper
+
+                    // Cria o HTML para cada curso
+                    cursosRandomizados.forEach(curso => {
+                        const slideHTML = `
+                            <div class="swiper-slide">
+                                <div class="course-card">
+                                    <img src="${curso.imagem}" alt="${curso.nome}" class="card-image">
+                                    
+                                    <div class="card-content-base">
+                                        <h4>${curso.nome}</h4>
+                                    </div>
+                                    
+                                    <div class="card-content-hover">
+                                        <p>${curso.detalhes}</p>
+                                        <a href="#" class="btn-inscrever">Inscrever-se</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        wrapper.innerHTML += slideHTML;
+                    });
+                }
+            }
+
+            // --- 4. INICIAR O SWIPER ---
+            function inicializarSwiper() {
+                // Mira na classe específica do carrossel
+                const swiper = new Swiper('.course-carousel', {
+                    // Loop Infinito
+                    loop: true,
+                    
+                    // Autoplay e Pausa no Hover
+                    autoplay: {
+                        delay: 3000, 
+                        disableOnInteraction: false, 
+                        pauseOnMouseEnter: true, // PAUSA no hover
+                    },
+
+                    // Navegação Manual com Setas
+                    navigation: {
+                        nextEl: '.swiper-button-prev',
+                        prevEl: '.swiper-button-next',
+                    },
+
+                    // Design e Responsividade
+                    slidesPerView: 1, // 1 slide por vez (Mobile)
+                    spaceBetween: 20,
+                    grabCursor: true, 
+                    
+                    breakpoints: {
+                        640: { slidesPerView: 2, spaceBetween: 20 },
+                        1024: { slidesPerView: 3, spaceBetween: 30 },
+                        1400: { slidesPerView: 4, spaceBetween: 30 }
+                    }
+                });
+            }
+
+            // --- 5. RODAR TUDO ---
+            popularCarrossel();
+            inicializarSwiper();
+
+        });
+    </script>
+    <script src="tema.js"></script>
+</body>
+</html>

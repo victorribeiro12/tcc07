@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario_tipo']) || $_SESSION['usuario_tipo'] !== 'professo
     // exit;
 }
 
-$nome_prof = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 'Professor Roberto';
+$nome_prof = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 'Professor Giordano Clepf';
 ?>
 
 <!DOCTYPE html>
@@ -42,12 +42,12 @@ $nome_prof = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 'Pro
             <span class="nav-text">Minhas Turmas</span>
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="../html/notas.php" class="nav-link">
             <i class="fa-solid fa-file-pen"></i> <!-- Ícone de Notas -->
             <span class="nav-text">Lançar Notas</span>
         </a>
 
-        <a href="chat.html" class="nav-link">
+        <a href="./chatprof.html" class="nav-link">
             <i class="fa-regular fa-comments"></i>
             <span class="nav-text">Mensagens</span>
         </a>

@@ -1,101 +1,78 @@
 <?php
 session_start();
 
-// --- 1. CONEXÃO COM O BANCO ---
-// Define os caminhos possíveis para o arquivo de conexão
-$caminho_config = dirname(__DIR__) . '/config/db.php';
-$caminho_html   = dirname(__DIR__) . '/html/conexao.php';
+require_once '../config/db.php';
 
-// Tenta carregar o arquivo de conexão
-if (file_exists($caminho_config)) {
-    require_once $caminho_config;
-} elseif (file_exists($caminho_html)) {
-    require_once $caminho_html;
-} else {
-    // Tenta caminhos relativos simples como última tentativa
-    if (file_exists('../html/conexao.php')) {
-        require_once '../html/conexao.php';
-    } elseif (file_exists('../config/db.php')) {
-        require_once '../config/db.php';
-    } else {
-        die("Erro: Arquivo de conexão com banco de dados não encontrado. Verifique se 'config/db.php' ou 'html/conexao.php' existem.");
-    }
+// Mapa de redirecionamento por tipo de usuário (pode ser movido para um arquivo de config)
+const PAGINAS_PERFIL = [
+    'aluno'     => '../html/dashboard.php', // Mapeia pelo tipo, não pelo domínio
+    'instrutor' => '../html/dashboard_professor.php',
+    'default'   => '../index.php',
+];
+
+// Mapeamento por domínio (substitui o redirecionamento por tipo quando houver correspondência)
+// Adicione ou altere os domínios conforme necessário. Use somente o host (ex: 'instituicao.edu.br').
+const DOMINIOS_PAGINAS = [
+    // Exemplo: 'instituicao.edu.br' => '../html/dashboard_professor.php',
+];
+// Se o usuário já está logado, redireciona para a página principal
+if (isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit();
 }
 
-// Garante compatibilidade entre variáveis de conexão ($conn vs $conexao)
-if (isset($conexao) && !isset($conn)) $conn = $conexao;
-if (!isset($conn)) die("Erro: Conexão não estabelecida. Verifique o arquivo de banco de dados.");
+$erro_login = '';
 
-
-// --- 2. PROCESSAMENTO ---
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $senha = $_POST['senha'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = strtolower(trim($_POST['email'] ?? ''));
+    $senha = trim($_POST['senha'] ?? '');
 
     if (empty($email) || empty($senha)) {
-        header("Location: ../login.php?erro=vazio");
-        exit();
-    }
+        $erro_login = "E-mail e senha são obrigatórios.";
+    } else {
+        // Usa a conexão PDO definida em config/db.php (variável $pdo)
+        try {
+            $sql = "SELECT id, nome, senha, tipo_usuario FROM usuarios WHERE email = :email LIMIT 1";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':email' => $email]);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Prepara a query SQL
-    $sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt) {
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-
-        if ($resultado->num_rows === 1) {
-            $usuario = $resultado->fetch_assoc();
-
-            // Verifica a senha
-            if (password_verify($senha, $usuario['senha'])) {
-                
+            // Verifica se o usuário existe e se a senha está correta
+            if ($usuario && password_verify($senha, $usuario['senha'])) {
+                // Login bem-sucedido: armazena dados na sessão
                 $_SESSION['usuario_id'] = $usuario['id'];
-                $_SESSION['nome_usuario'] = $usuario['nome'];
-                $_SESSION['email_usuario'] = $usuario['email'];
-                $_SESSION['loggedin'] = true;
+                $_SESSION['usuario_nome'] = $usuario['nome'];
+                $_SESSION['usuario_tipo'] = $usuario['tipo_usuario']; // Campo 'tipo_usuario' do DB
 
-                $destino = '';
+                // Regenera o ID da sessão para prevenir session fixation
+                session_regenerate_id(true);
 
-                // Lógica de redirecionamento por domínio
-                // A) ALUNO
-                if (stripos($email, '@senaimgaluno.com.br') !== false) {
-                    $_SESSION['usuario_tipo'] = 'aluno';
-                    $destino = '../html/dashboard.php'; 
-                
-                // B) PROFESSOR
-                } elseif (stripos($email, '@docente.edu.br') !== false) {
-                    $_SESSION['usuario_tipo'] = 'professor';
-                    $destino = '../html/dashboard_professor.php'; 
-                
-                // C) VISITANTE
-                } else {
-                    $_SESSION['usuario_tipo'] = 'visitante';
-                    $destino = '../html/paginavisitante.php';
+                // Determina destino por domínio do e-mail primeiro, senão por tipo de usuário
+                $dominio = '';
+                if (strpos($email, '@') !== false) {
+                    $dominio = substr(strrchr($email, '@'), 1);
                 }
 
-                header("Location: " . $destino);
-                exit();
+                if (!empty($dominio) && isset(DOMINIOS_PAGINAS[$dominio])) {
+                    $pagina_destino = DOMINIOS_PAGINAS[$dominio];
+                } else {
+                    $pagina_destino = PAGINAS_PERFIL[$usuario['tipo_usuario']] ?? PAGINAS_PERFIL['default'];
+                }
 
+                header("Location: " . $pagina_destino);
+                exit();
             } else {
-                header("Location: ../login.php?erro=senha");
-                exit();
+                $erro_login = "E-mail ou senha inválidos.";
             }
-        } else {
-            header("Location: ../login.php?erro=usuario");
-            exit();
+        } catch (PDOException $e) {
+            error_log("Erro de login (PDO): " . $e->getMessage());
+            $erro_login = "Ocorreu um erro no servidor. Tente novamente.";
         }
-        $stmt->close();
-    } else {
-        die("Erro no Banco: " . $conn->error);
     }
-    $conn->close();
-
-} else {
-    header("Location: ../login.php");
-    exit();
+}
+// Se houver erro, exibe a mensagem de erro (ou redireciona de volta para o formulário de login)
+if (!empty($erro_login)) {
+    // Normalmente, você redirecionaria de volta para o login.php com o erro via SESSION ou GET
+    echo "Erro de Login: " . $erro_login . " <a href='../login.php'>Voltar</a>";
 }
 ?>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat do Instrutor - Autocademy</title>
+    <link rel="stylesheet" href="../css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+
+<body class="">
+ <aside class="sidebar">
+        <div class="logo-area">
+            <img src="../imagens/logo.png" alt="Logo">
+            <span class="logo-text">Autocademy</span>
+        </div>
+
+        <a href="../html/dashboard.php" class="nav-link">
+            <img src="../imagens/iconhome.png" alt="Início">
+            <span class="nav-text">Início</span>
+        </a>
+
+        <a href="../html/materias.php" class="nav-link">
+            <img src="../imagens/icons8-livros-96.png" alt="Matérias">
+            <span class="nav-text">Matérias</span>
+        </a>
+
+        <a href="../html/chat.html" class="nav-link active"> 
+           <img src="../imagens/chat.png" alt="Chat">
+            <span class="nav-text">Chat</span>
+        </a>
+
+        <a href="#" class="nav-link">
+            <img src="../imagens/iconhistorico.png" alt="Histórico">
+            <span class="nav-text">Histórico</span>
+        </a>
+
+        <div class="spacer"></div>
+
+        <a href="../html/config.html" class="nav-link">
+            <img src="../imagens/icons8-configurações-150.png" alt="Config">
+            <span class="nav-text">Configurações</span>
+        </a>
+    </aside>
+
+    <main class="main-wrapper">
+
+        <header class="top-header">
+            <h2 style="font-size: 1.2rem; color: var(--text-primary);">Central do Instrutor</h2>
+            
+            <div class="user-profile">
+                <span>Prof. João Silva</span> <div class="avatar-circle" style="background-color: #007bff;"><i class="fa-solid fa-graduation-cap"></i></div>
+            </div>
+        </header>
+
+        <div class="chat-layout instructor-layout"> 
+            
+            <div class="participants-sidebar">
+                <div class="participants-header">
+                    <h3>Conversas</h3>
+                    <div class="filter-controls">
+                        <select class="status-filter">
+                            <option value="all">Todos os Chats</option>
+                            <option value="pending">Em Aberto (4)</option>
+                            <option value="urgent">Urgente (SLA)</option>
+                            <option value="resolved">Resolvidos</option>
+                        </select>
+                    </div>
+                    <input type="text" class="participants-search" placeholder="Buscar Aluno/Assunto...">
+                </div>
+
+                <div class="participants-list">
+                    <div class="participant-item active-chat" style="border-left: 4px solid var(--primary-color);"> 
+                        <div class="participant-avatar" style="background: #3498db;">
+                            <span>AS</span>
+                        </div>
+                        <div class="participant-info">
+                            <div class="participant-name">Aluno Senai - T2024A</div>
+                            <div class="participant-role **urgency-tag**">**EM ESPERA: 3h 15min**</div> 
+                        </div>
+                        <span class="unread-count">2</span>
+                    </div>
+
+                    <div class="participant-item">
+                        <div class="participant-avatar" style="background: #e74c3c;">
+                            <span>MP</span>
+                        </div>
+                        <div class="participant-info">
+                            <div class="participant-name">Maria Pereira - T2023B</div>
+                            <div class="participant-role">Última msg: 1 dia atrás</div>
+                        </div>
+                    </div>
+                    
+                    </div>
+            </div>
+
+            <div class="chat-area">
+                
+                <div class="chat-area-header">
+                    <div class="chat-target-info">
+                        <h2>Aluno Senai</h2>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Matrícula: 12345 | Turma: T2024A</span>
+                    </div>
+                    <button class="resolve-btn"><i class="fa-solid fa-check-circle"></i> Marcar como Resolvido</button>
+                </div>
+
+                <div class="messages-container" id="msgContainer">
+                    <div class="message">
+                        <div class="participant-avatar" style="width: 32px; height: 32px; font-size: 12px; background: #3498db;">AS</div>
+                        <div>
+                            <div class="message-bubble">
+                                Bom dia, professor! Estou com dificuldade no **cálculo de momento de inércia** do Módulo 5.
+                            </div>
+                            <span class="message-time">10:30</span>
+                        </div>
+                    </div>
+
+                    <div class="message own">
+                        <div>
+                            <div class="message-bubble">
+                                Olá! Qual parte específica está confusa? Você verificou a seção 5.2 sobre a Tabela de Inércias?
+                            </div>
+                            <span class="message-time">10:32 (Lido)</span>
+                        </div>
+                        <div class="participant-avatar" style="width: 32px; height: 32px; font-size: 12px; background-color: #007bff;"><i class="fa-solid fa-graduation-cap"></i></div>
+                    </div>
+                    
+                    </div>
+                
+                <div class="input-area">
+                    <div class="input-wrapper">
+                        <button class="quick-reply-btn" title="Respostas Prontas/Modelos">
+                            <i class="fa-solid fa-comment-dots" style="font-size: 1.2rem;"></i>
+                        </button>
+
+                        <i class="fa-solid fa-paperclip" style="color: var(--text-secondary); font-size: 1.2rem; cursor: pointer;"></i>
+                        <input type="text" class="message-input" placeholder="Digite sua resposta para Aluno Senai...">
+                        <button class="send-btn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="internal-notes">
+                        <input type="text" placeholder="Anotação Interna (Não visível para o aluno)">
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="student-context-sidebar">
+                <h3>Detalhes do Aluno</h3>
+                <div class="student-info-block">
+                    <h4><i class="fa-solid fa-user-graduate"></i> Dados Principais</h4>
+                    <p><strong>Nome:</strong> Aluno Senai</p>
+                    <p><strong>Matrícula:</strong> 12345</p>
+                    <p><strong>Curso:</strong> Técnico em Mecânica Automotiva</p>
+                </div>
+
+                <div class="student-info-block">
+                    <h4><i class="fa-solid fa-chart-line"></i> Progresso no Curso</h4>
+                    <p><strong>Conclusão:</strong> 65%</p>
+                    <p><strong>Módulo Atual:</strong> Módulo 6 - Transmissão</p>
+                    <p><strong>Última Nota:</strong> 8.5 (Módulo 5)</p>
+                    <p><strong>Alertas:</strong> <span style="color: #e74c3c;">Quiz M5 Reprovado (1x)</span></p>
+                </div>
+
+                <div class="student-info-block">
+                    <h4><i class="fa-solid fa-clock-rotate-left"></i> Histórico de Chats</h4>
+                    <p><strong>Total de Chats:</strong> 8</p>
+                    <p><strong>Tópicos Recentes:</strong></p>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-dot" style="font-size: 0.6rem; margin-right: 5px;"></i> Momento de Inércia (Atual)</li>
+                        <li><i class="fa-solid fa-circle-dot" style="font-size: 0.6rem; margin-right: 5px;"></i> Montagem do Motor M4</li>
+                        <li><i class="fa-solid fa-circle-dot" style="font-size: 0.6rem; margin-right: 5px;"></i> Prazo do TCC</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    <script src="../html/tema.js"></script>
+    <script src="../javascript.js/chat.js"></script>
+    <script>
+        // Adicione aqui scripts específicos para o instrutor, como a lógica para filtros e respostas prontas.
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+/* ==========================================================================
+   6.1. CHAT - LAYOUT INSTRUTOR (Extensão)
+   ========================================================================== */
+
+/* Layout de 3 colunas */
+.chat-layout.instructor-layout {
+    display: grid;
+    /* Colunas: Conversas (320px), Chat (flex), Contexto (340px) */
+    grid-template-columns: 320px 1fr 340px;
+    gap: 0; /* Usamos bordas para separação */
+}
+
+/* 1. PAINEL DE CONVERSAS (FILTROS E ITENS) */
+
+.filter-controls {
+    margin-top: 15px;
+}
+
+.status-filter {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: var(--transition-border), var(--transition-shadow);
+}
+.status-filter:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.05);
+}
+
+.participant-item .urgency-tag {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+.participant-item .unread-count {
+    margin-left: auto;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.participant-item.active-chat {
+    background: var(--bg-hover);
+}
+
+/* Esmaece chats resolvidos na lista */
+.participant-item.resolved-chat {
+    opacity: 0.6;
+    transition: var(--transition-opacity);
+}
+.participant-item.resolved-chat:hover {
+    opacity: 1;
+}
+
+/* 2. ÁREA DO CHAT (BOTÕES E ANOTAÇÕES) */
+
+.chat-area-header .resolve-btn {
+    /* Baseado no .btn-start / .task-action */
+    background-color: #2ecc71; /* Verde para "resolvido" */
+    border: 1px solid #27ad60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition-bg), var(--transition-transform), var(--transition-shadow), var(--transition-border);
+    font-weight: 500;
+    cursor: pointer;
+}
+.chat-area-header .resolve-btn:hover {
+    filter: brightness(1.1);
+    box-shadow: var(--shadow);
+}
+.chat-area-header .resolve-btn:active {
+    transform: scale(0.97);
+}
+.chat-area-header .resolve-btn.disabled,
+.chat-area-header .resolve-btn:disabled {
+    background-color: var(--bg-hover);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+
+/* Re-estiliza .input-area para suportar notas internas */
+.input-area {
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+}
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    width: 100%;
+}
+
+.input-area .quick-reply-btn {
+    /* Baseado no .send-btn mas sutil */
+    width: 50px; height: 50px; border: none;
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition-bg), var(--transition-color), var(--transition-border);
+    font-size: 1.2rem;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+.input-area .quick-reply-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.internal-notes {
+    width: 100%;
+    padding: 15px 30px;
+    background: var(--bg-body); /* Um tom mais escuro que o input-area */
+    border-top: 1px solid var(--border-color);
+}
+.internal-notes input,
+.student-info-block .internal-notes-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px dashed var(--border-color); /* Para indicar "interno" */
+    background-color: var(--bg-input);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: var(--transition-border), var(--transition-color);
+}
+.internal-notes input:focus,
+.student-info-block .internal-notes-input:focus {
+    border-color: var(--accent-color);
+    border-style: solid;
+    color: var(--text-primary);
+}
+
+
+/* 3. PAINEL DE CONTEXTO DO ALUNO (NOVO) */
+
+.student-context-sidebar {
+    background-color: var(--bg-card);
+    border-left: 1px solid var(--border-color);
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.student-context-sidebar h3 {
+    /* Baseado no .page-title mas menor */
+    font-family: 'Chopsic', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0; /* Gap da flexbox cuida disso */
+    color: var(--text-primary);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 15px;
+}
+
+.student-info-block {
+    /* Baseado no .settings-item */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+.student-info-block:last-of-type {
+    border-bottom: none;
+}
+
+.student-info-block h4 {
+    /* Baseado no .settings-header */
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px; /* Espaço para o conteúdo abaixo */
+}
+.student-info-block h4 i {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.student-info-block p,
+.student-info-block li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding-left: 30px; /* Alinhar com o ícone do h4 */
+}
+
+.student-info-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 0;
+}
+.student-info-block li {
+    position: relative;
+    padding-left: 30px;
+}
+.student-info-block li i {
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    color: var(--text-secondary);
+    font-size: 0.6rem !important; /* Força o tamanho pequeno */
+}
+.student-info-block p strong {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+
+/* 4. MENU DE RESPOSTAS PRONTAS (JS) */
+
+.quick-reply-menu {
+    position: absolute; 
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-hover);
+    border-radius: 12px; /* Padrão dos cards */
+    width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1001; /* Acima de tudo */
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInMenu 0.2s ease forwards;
+    bottom: 100px; /* Posição inicial (JS pode ajustar) */
+    left: 30px;
+}
+
+@keyframes fadeInMenu {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quick-reply-item {
+    /* Baseado no .settings-item */
+    display: block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition-bg);
+}
+.quick-reply-item:hover {
+    background-color: var(--bg-hover);
+}

@@ -1,20 +1,16 @@
 <?php
-// Arquivo: config/db.php
+// config/db.php
 
-$host = 'localhost';
-$banco = 'autocademy';  // Nome do seu banco de dados
-$usuario = 'root';      // Usuário do MySQL (no Laragon geralmente é 'root')
-$senha = '';            // Senha do MySQL (no Laragon geralmente é vazio)
+$host = 'localhost'; // ou 'localhost'
+$db_name = 'autocademy'; // Mude para o nome do seu DB
+$username = 'root'; // Seu usuário do MySQL
+$password = ''; // Sua senha do MySQL
 
-// Cria a conexão usando as variáveis corretas definidas acima
-$conexao = new mysqli($host, $usuario, $senha, $banco);
-
-// Verifica se deu erro na conexão
-if ($conexao->connect_error) {
-    die("Falha na conexão: " . $conexao->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password);
+    // Configura o PDO para lançar exceções em caso de erro
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
 }
-
-// Define o charset para evitar problemas com acentuação
-$conexao->set_charset("utf8mb4");
-
-?>  
+?>

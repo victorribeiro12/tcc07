@@ -1,0 +1,291 @@
+
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS: LANÇAMENTO DE NOTAS (CSS PURO)
+   ========================================================================== */
+
+/* Container Principal para dar respiro no fundo da página */
+.notes-container {
+    padding-bottom: 80px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cabeçalho da Página (Título e Botão de Ação) */
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-title-notes {
+    font-family: 'Chopsic', sans-serif;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* Wrapper do Seletor de Turma */
+.class-selector-wrapper {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.class-selector-wrapper::after {
+    /* Ícone de seta customizado via CSS puro */
+    content: '▼';
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.class-selector {
+    width: 100%;
+    max-width: 400px;
+    padding: 14px 20px;
+    padding-right: 40px; /* Espaço para a seta */
+    border-radius: 10px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* Remove estilo nativo do navegador */
+    -webkit-appearance: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.class-selector:hover {
+    border-color: var(--text-secondary);
+}
+
+.class-selector:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1); /* Fallback sutil */
+}
+
+/* Mensagem de Sucesso (Feedback Visual) */
+.success-message {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container da Tabela (Card) */
+.table-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow-x: auto; /* Permite scroll horizontal em telas pequenas */
+    position: relative;
+}
+
+/* A Tabela */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    min-width: 800px; /* Garante que a tabela não quebre em telas muito pequenas */
+}
+
+.data-table thead {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.data-table th {
+    padding: 20px 24px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+    background-color: var(--bg-hover);
+}
+
+/* Célula do Aluno */
+.student-cell {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.table-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--bg-input);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.student-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.student-info strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.student-info small {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+/* Inputs de Nota Customizados */
+.grade-input {
+    width: 65px;
+    padding: 10px 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+    font-family: inherit; /* Herda a fonte do sistema */
+}
+
+/* Remove as setas (spinners) padrões dos navegadores para inputs number */
+.grade-input::-webkit-outer-spin-button,
+.grade-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.grade-input {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.grade-input:focus {
+    border-color: var(--accent-color);
+    background-color: var(--bg-card);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05); /* Brilho sutil */
+    transform: scale(1.05); /* Leve zoom ao focar */
+}
+
+.grade-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.3;
+}
+
+/* Coluna de Média */
+.average-cell {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+}
+
+/* Badges de Status (Pílulas) */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 100px;
+}
+
+.status-pill.pass {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-pill.fail {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Botão Flutuante de Salvar */
+.btn-save-notes {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-save-notes i {
+    font-size: 1.1rem;
+}
+
+.btn-save-notes:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.btn-save-notes:active {
+    transform: translateY(0);
+}

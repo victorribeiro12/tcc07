@@ -16,4 +16,5 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
+// Se chegou até aqui, o usuário está logado.
 ?>

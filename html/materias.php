@@ -138,6 +138,6 @@ $nome_a_exibir = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 
             </main>
     
 
-    <script src="tema.js"></script>
+    <script src="../html/tema.js"></script>
 </body>
 </html>

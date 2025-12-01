@@ -16,7 +16,7 @@
     --bg-sidebar: #2c2c2c;
     --bg-card: #2c2c2c;
     --bg-header: rgba(31, 31, 31, 0.95);
-    --bg-hover: #3a3a3a;
+    --bg-hover: #202020;
     --bg-input: #2c2c2c;
     
     /* Textos */
@@ -367,7 +367,6 @@ body {
    5. ESTILOS DE CONFIGURAÇÕES
    ========================================================================== */
 .page-title {
-    font-family: 'Chopsic', sans-serif;
     font-size: 2rem;
     margin-bottom: 25px;
     font-weight: normal;
@@ -384,8 +383,8 @@ body {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: background-color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
 }
-
 .settings-header {
     padding: 20px 24px;
     border-bottom: 1px solid var(--border-color);
@@ -395,8 +394,6 @@ body {
     background-color: rgba(128, 128, 128, 0.03);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
-/* Links Internos (Linhas clicáveis) */
 .settings-item {
     display: flex; 
     justify-content: space-between; 

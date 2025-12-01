@@ -62,7 +62,7 @@ $nome_a_exibir = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 
                 <div class="avatar-circle">
                     <i class="fa-solid fa-user"></i>
                 </div>
-                <span>Olá, <strong><?= htmlspecialchars($nome_a_exibir) ?></strong></span>
+                <span>Olá, <strong>victor</strong></span>
             
             </div>
         </header>
