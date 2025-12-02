@@ -51,13 +51,21 @@ $nome_prof = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 'Pro
             <i class="fa-regular fa-comments"></i>
             <span class="nav-text">Mensagens</span>
         </a>
+            <a href="../html/diario_classe.php" class="nav-link">
+            <img src="../imagens/iconagenda.png" alt="Config">
+            <span class="nav-text">Diário das Turmas</span>
+        </a>
+         
 
         <div class="spacer"></div>
 
-        <a href="config.html" class="nav-link">
+       
+        
+        <a href="configpro.php" class="nav-link">
             <img src="../imagens/icons8-configurações-150.png" alt="Config">
             <span class="nav-text">Configurações</span>
         </a>
+        
     </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
@@ -139,8 +147,8 @@ $nome_prof = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 'Pro
                                     <div style="width: 75%; height: 100%; background: var(--accent-color); border-radius: 3px;"></div>
                                 </div>
                                 <div style="margin-top: 15px; display: flex; gap: 10px;">
-                                    <a href="#" class="action-btn-small">Diário</a>
-                                    <a href="#" class="action-btn-small">Notas</a>
+                                    <a href="../html/diario_classe.php" class="action-btn-small">Diário</a>
+                                    <a href="../html/lancar_notas.php" class="action-btn-small">Notas</a>
                                 </div>
                             </div>
 
@@ -170,8 +178,8 @@ $nome_prof = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 'Pro
                                     <div style="width: 30%; height: 100%; background: var(--accent-color); border-radius: 3px;"></div>
                                 </div>
                                 <div style="margin-top: 15px; display: flex; gap: 10px;">
-                                    <a href="#" class="action-btn-small">Diário</a>
-                                    <a href="#" class="action-btn-small">Notas</a>
+                                    <a href="../html/diario_classe.php" class="action-btn-small">Diário</a>
+                                    <a href="../html/lancar_notas.php" class="action-btn-small">Notas</a>
                                 </div>
                             </div>
 

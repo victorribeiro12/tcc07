@@ -42,8 +42,13 @@ $nome_prof = isset($_SESSION['nome_usuario']) ? $_SESSION['nome_usuario'] : 'Pro
             <span class="nav-text">Mensagens</span>
         </a>
 
+   <a href="../html/diario_classe.php" class="nav-link">
+            <img src="../imagens/iconagenda.png" alt="Config">
+            <span class="nav-text">Diário das Turmas</span>
+        </a>
+
         <div class="spacer"></div>
-        <a href="config.html" class="nav-link"><img src="../imagens/icons8-configurações-150.png"><span class="nav-text">Configurações</span></a>
+        <a href="configpro.php" class="nav-link"><img src="../imagens/icons8-configurações-150.png"><span class="nav-text">Configurações</span></a>
     </aside>
 
     <main class="main-wrapper">

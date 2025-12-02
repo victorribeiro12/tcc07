@@ -7,6 +7,144 @@
     <link rel="stylesheet" href="../css/chat.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
 </head>
+<style>
+    /* ==========================================================================
+       VARIAVEIS GLOBAIS (Garantindo que o tema funcione)
+       ========================================================================== */
+    :root {
+        --bg-body: #121214;
+        --bg-sidebar: #202024;
+        --bg-hover: #323238;
+        --text-primary: #e1e1e6;
+        --text-secondary: #a8a8b3;
+        --accent-color: #E53935;
+        --border-color: #323238;
+        --sidebar-width: 80px;
+        --sidebar-width-open: 260px;
+        --transition-speed: 0.3s;
+    }
+
+    /* Reset básico */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg-body); display: flex; height: 100vh; overflow: hidden; }
+
+    /* ==========================================================================
+       SIDEBAR (CORREÇÃO DA BARRA LATERAL)
+       ========================================================================== */
+    .sidebar {
+        width: var(--sidebar-width);
+        height: 100vh; /* Ocupa a altura total */
+        background-color: var(--bg-sidebar);
+        border-right: 1px solid var(--border-color);
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        
+        position: relative; /* Mantém ela no fluxo do flex */
+        transition: width var(--transition-speed) ease;
+        z-index: 100;
+        flex-shrink: 0; /* Impede que ela encolha */
+    }
+
+    /* Efeito de expandir ao passar o mouse */
+    .sidebar:hover {
+        width: var(--sidebar-width-open);
+        align-items: flex-start; /* Alinha itens à esquerda quando aberto */
+    }
+
+    /* Logo */
+    .logo-area {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 20px;
+        white-space: nowrap;
+    }
+
+    .logo-area img {
+        width: 40px;
+        min-width: 40px;
+    }
+
+    .logo-text {
+        margin-left: 15px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .sidebar:hover .logo-text { opacity: 1; }
+
+    /* Links de Navegação */
+    .nav-link {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        height: 50px;
+        margin: 5px auto;
+        padding: 0 14px; /* Ajuste para centralizar ícone quando fechado */
+        border-radius: 12px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    /* Ícones dentro dos links */
+    .nav-link img, .nav-link i {
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 24px !important;
+        object-fit: contain;
+        margin-right: 15px;
+        font-size: 20px;
+        text-align: center;
+        filter: grayscale(100%) brightness(1.5); /* Deixa ícones cinza claro */
+    }
+
+    /* Texto do Link */
+    .nav-text {
+        opacity: 0;
+        transition: opacity 0.2s;
+        font-weight: 500;
+    }
+    .sidebar:hover .nav-text { opacity: 1; }
+
+    /* Hover e Ativo */
+    .nav-link:hover {
+        background-color: var(--bg-hover);
+        color: var(--text-primary);
+    }
+    
+    .nav-link.active {
+        background-color: var(--accent-color);
+        color: white !important;
+    }
+    .nav-link.active img { filter: brightness(0) invert(1); /* Deixa ícone branco */ }
+    
+    /* Spacer para empurrar config para baixo */
+    .spacer { flex: 1; }
+
+    /* ==========================================================================
+       LAYOUT PRINCIPAL (CORREÇÃO)
+       ========================================================================== */
+    .main-wrapper {
+        flex: 1; /* Ocupa o resto da largura */
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+    }
+</style>
 
 <body class="">
  <aside class="sidebar">
@@ -15,29 +153,36 @@
             <span class="logo-text">Autocademy</span>
         </div>
 
-        <a href="../html/dashboard.php" class="nav-link">
-            <img src="../imagens/iconhome.png" alt="Início">
-            <span class="nav-text">Início</span>
+     <a href="dashboard_professor.php" class="nav-link active">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span class="nav-text"> Painel</span>
         </a>
 
-        <a href="../html/materias.php" class="nav-link">
-            <img src="../imagens/icons8-livros-96.png" alt="Matérias">
-            <span class="nav-text">Matérias</span>
+        <a href="../html/turmas.php" class="nav-link">
+            <i class="fa-solid fa-users"></i> <!-- Ícone de Turmas -->
+            <span class="nav-text"> Minhas Turmas</span>
         </a>
 
-        <a href="../html/chat.html" class="nav-link active"> 
-           <img src="../imagens/chat.png" alt="Chat">
-            <span class="nav-text">Chat</span>
+        <a href="../html/notas.php" class="nav-link">
+              <i class="fa-solid fa-file-pen"></i>
+            <span class="nav-text"> Lançar Notas</span>
         </a>
 
-        <a href="#" class="nav-link">
-            <img src="../imagens/iconhistorico.png" alt="Histórico">
-            <span class="nav-text">Histórico</span>
+        <a href="./chatprof.html" class="nav-link">
+            <i class="fa-regular fa-comments"></i>
+            <span class="nav-text"> Mensagens</span>
         </a>
+            <a href="../html/diario_classe.php" class="nav-link">
+            <img src="../imagens/iconagenda.png" alt="Config">
+            <span class="nav-text">Diário das Turmas</span>
+        </a>
+         
 
         <div class="spacer"></div>
 
-        <a href="../html/config.html" class="nav-link">
+       
+        
+        <a href="configpro.php" class="nav-link">
             <img src="../imagens/icons8-configurações-150.png" alt="Config">
             <span class="nav-text">Configurações</span>
         </a>
@@ -179,10 +324,8 @@
 
     </main>
     <script src="../html/tema.js"></script>
-    <script src="../javascript.js/chat.js"></script>
-    <script>
-        // Adicione aqui scripts específicos para o instrutor, como a lógica para filtros e respostas prontas.
     </script>
-
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.4.0.js"></script>
+<script src="../javascript.js/api.js"></script>
 </body>
 </html>

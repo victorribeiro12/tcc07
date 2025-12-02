@@ -451,7 +451,7 @@ body {
 
 .student-context-sidebar h3 {
     /* Baseado no .page-title mas menor */
-    font-family: 'Chopsic', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 1.5rem;
     margin-bottom: 0; /* Gap da flexbox cuida disso */
     color: var(--text-primary);

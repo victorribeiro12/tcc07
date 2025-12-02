@@ -1,65 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrar - Autocademy</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Autocademy</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+
+        .msg-erro {
+            background-color: #ffdddd;
+            color: #d8000c;
+            border: 1px solid #d8000c;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <main class="main-login-cadastro">
-        <div class="form-wrapper">
-            <h2>Entrar</h2>
+    <main class="main-login-cadastro">
 
-                        <form action="../backend/processa_login.php" method="post" id="loginForm"> 
-                
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required placeholder="Digite seu e-mail:">
+        <div class="form-wrapper">
+            <h2>Entrar</h2>
 
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required placeholder="Digite sua senha:">
+            <!-- Bloco que exibe o erro se houver -->
+            <?php if(isset($_GET['erro'])): ?>
+                <div class="msg-erro">
+                    <?php echo htmlspecialchars($_GET['erro']); ?>
+                </div>
+            <?php endif; ?>
 
-                <button type="submit">Enviar</button>
+            <form action="backend/processa_login.php" method="post">
+                
+                <label for="email">E-mail Institucional</label>
+                <input type="email" id="email" name="email" required placeholder="Digite seu e-mail (@senaimgaluno ou @docente)">
 
-                <p>Não tem uma conta? <a href="cadastro.php">Crie uma aqui!</a></p>
-            </form>
-        </div>
-    </main>
-    
-        <script>
-        // Mapeamento de Domínio para Página de Destino
-        // Note que adicionei o caminho "../backend/" para manter a consistência com o original
-        const destinoPorDominio = {
-            '@senaimgaluno.com.br': '../html/dashboard.php',
-            '@docente.edu.br': '../html/dashboard_professor.php',
-            '@gmail.com': '../html/paginavisitante.php' 
-        };
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required placeholder="Digite sua senha:">
 
-        // URL padrão (fallback) se o domínio não for mapeado
-        const urlPadrao = '../backend/processa_login.php'; 
+                <button type="submit">Acessar Plataforma</button>
 
-        const form = document.getElementById('loginForm');
-        const emailInput = document.getElementById('email');
+                <!-- Link de cadastro removido conforme solicitado -->
+            </form>
 
-        form.addEventListener('submit', function(event) {
-            // 1. Impede o envio padrão do formulário
-            event.preventDefault(); 
-            
-            const email = emailInput.value.toLowerCase();
-            let novoDestino = urlPadrao;
-
-            // 2. Verifica o domínio no e-mail
-            for (const dominio in destinoPorDominio) {
-                if (email.endsWith(dominio)) {
-                    novoDestino = destinoPorDominio[dominio];
-                    break;
-                }
-            }
-
-            // 3. Altera o atributo 'action' e envia
-            form.action = novoDestino;
-            form.submit();
-        });
-    </script>
+        </div>
+    </main>
+    
 </body>
 </html>
